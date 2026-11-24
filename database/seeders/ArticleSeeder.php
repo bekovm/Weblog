@@ -1,8 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Article;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ArticleSeeder extends Seeder
@@ -12,6 +13,9 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(50)->create();
+        Article::factory()
+            ->count(50)
+            ->for(User::query()->firstOrFail())
+            ->create();
     }
 }
